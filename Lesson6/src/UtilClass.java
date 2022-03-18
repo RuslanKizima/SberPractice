@@ -35,17 +35,17 @@ public class UtilClass {
      * Если в аргументах список или элемент равен null, то выбрасывается исключение IllegalArgumentException
      * Если элемент не найден, то возвращаем null
      *
-     * @param name список, в котором ищем элемент
+     * @param list список, в котором ищем элемент
      * @param elem элемент, который ищется в списке.
      * @return элемент из списка.
      */
-    public static <E> E findElem(List<E> name, E elem) {
-        if ((name == null) || (elem == null)){
+    public static <E> E findElem(List<E> list, E elem) {
+        if ((list == null) || (elem == null)){
             throw new IllegalArgumentException();
         } else {
-            for (E List: name){
-                if (elem.equals(List)) {
-                    return List;
+            for (E var: list){
+                if (elem.equals(var)) {
+                    return var;
                 }
             }
             return null;
@@ -77,28 +77,19 @@ public class UtilClass {
      * Если хотя-бы один из аргументов равен null, то выбрасываем исключение IllegalArgumentException
      * Аргументы метода не меняются
      *
-     * @param name1 первый список
-     * @param name2 второй список
+     * @param list1 первый список
+     * @param list2 второй список
      * @return возвращает список, который содержит элементы из списка list1, в котором удалены все элементы из
      * списка list2.
      */
-    public static<T> List removeAll(List<T> name1, List<T> name2) {
-        if ((name1 == null) || (name2 == null)){
+    public static<E> List<E> removeAll(List<E> list1, List<E> list2) {
+        if ((list1 == null) || (list2 == null)){
             throw new IllegalArgumentException();
         } else {
-            List<T> newList = new ArrayList<>();
-            boolean isNotCont = true;
-            for(T List1: name1){
-                for(T List2: name2){
-                    if(List1.equals(List2)){
-                        isNotCont = false;
-                    }
-                }
-                if (isNotCont){
-                    newList.add(List1);
-                }
-                isNotCont = true;
-            }
+            List<E> newList = new ArrayList<>(list1);
+
+            newList.removeAll(list2);
+
             return newList;
         }
     }
@@ -112,20 +103,20 @@ public class UtilClass {
      * 2) Используйте ограничения для типизации, чтобы списки могли содержать любые числа (Integer, Double, Float и т.д)
      * 3) Для приведения Number к double воспользуйтесь num.doubleValue();
      *
-     * @param name1 первый список
-     * @param name2 второй список
+     * @param list1 первый список
+     * @param list2 второй список
      * @return сумма чисел.
      */
-    public static <N> double sum(List<? extends Number> name1, List<? extends Number> name2) {
-        if ((name1 == null) || (name2 == null)){
+    public static <N> double sum(List<? extends Number> list1, List<? extends Number> list2) {
+        if ((list1 == null) || (list2 == null)){
             throw new IllegalArgumentException();
         } else {
 
             double sum = 0;
-            for (Number num: name1){
+            for (Number num: list1){
                 sum += num.doubleValue();
             }
-            for (Number num: name2){
+            for (Number num: list2){
                 sum += num.doubleValue();
             }
 
